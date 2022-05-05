@@ -1,0 +1,51 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 28
+
+    defaultConfig {
+        applicationId "com.ml.plugin1"
+        minSdkVersion 19
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation 'com.android.support:appcompat-v7:28.+'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+}
+
+
+//该操作是将生成的apk文件，拷贝到指定的目录下
+android.applicationVariants.all { variant ->
+    variant.outputs.all{ output ->
+        def outputFile =output.outputFile
+        println "扫描路径："+ outputFile
+        if(outputFile != null && outputFile.name.contains('debug')){
+            //拷贝from目录下的文件到into目录下，然后通过rename对文件进行从新命名
+            copy{
+                from outputFile
+                into "$rootDir/app/src/main/assets"
+                rename(outputFile.name, "plugin1.apk")
+            }
+        }
+    }
+}

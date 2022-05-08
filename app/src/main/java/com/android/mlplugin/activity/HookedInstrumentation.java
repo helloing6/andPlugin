@@ -4,19 +4,16 @@ import android.app.Activity;
 import android.app.Instrumentation;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
 import android.view.ContextThemeWrapper;
 
 import com.android.mlplugin.plugin.PluginApp;
-import com.android.mlplugin.plugin.XMPlugin;
+import com.android.mlplugin.plugin.PluginManger;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.util.List;
 
 public class HookedInstrumentation extends Instrumentation  {
 
@@ -75,7 +72,7 @@ public class HookedInstrumentation extends Instrumentation  {
     }
 
     private boolean isPluginLoaded(String packageName) {
-        return XMPlugin.getLoadedPluginApk() != null;
+        return PluginManger.getLoadedPluginApk() != null;
     }
 
     @Override
@@ -84,7 +81,7 @@ public class HookedInstrumentation extends Instrumentation  {
         if (hookToPluginActivity(intent)) {
             String targetClassName = intent.getComponent().getClassName();
             // TODO: 2022/4/26  获取当前目标activity的PluginApp对象实例
-            PluginApp pluginApp = XMPlugin.getLoadedPluginApk();
+            PluginApp pluginApp = PluginManger.getLoadedPluginApk();
             Activity activity = mBase.newActivity(pluginApp.mClassLoader, targetClassName, intent);
             activity.setIntent(intent);
 

@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.util.Log;
 
 import com.android.mlplugin.BuildConfig;
-import com.android.mlplugin.ProxyService;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.InvocationTargetException;
@@ -13,7 +12,7 @@ import java.lang.reflect.Method;
 public class IActivityManagerProxy implements InvocationHandler {
     private static Object mActivityManager;
     private final static String PACKAGE_NAME = "com.android.mlplugin";
-    private final static String CLASS_NAME = PACKAGE_NAME + ".ProxyService";
+    private final static String CLASS_NAME = PACKAGE_NAME + ".service2.ProxyService";
 
     public IActivityManagerProxy(Object activityManager) {
         mActivityManager = activityManager;

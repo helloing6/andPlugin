@@ -21,8 +21,9 @@
         </activity>
 
         <activity android:name=".StubActivity"/>
+        <service android:name=".service.StubService"/>
 
-        <service android:name=".ProxyService"/>
+        <service android:name=".service2.ProxyService"/>
 
     </application>
 

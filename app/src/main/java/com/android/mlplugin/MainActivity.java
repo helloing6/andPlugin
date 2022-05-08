@@ -9,8 +9,9 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.android.mlplugin.broad.ReceiverHelper;
-import com.android.mlplugin.plugin.XMPlugin;
+import com.android.mlplugin.plugin.PluginManger;
 import com.android.mlplugin.activity.XMActivityHook;
+import com.android.mlplugin.service.HookServiceManager;
 
 import java.io.File;
 
@@ -24,10 +25,17 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 //        checkSelfPermission();
 
-        XMPlugin.loadPluginApk(this,"plugin1.apk");
+        // 插件加载
+        PluginManger.loadPluginApk(this,"plugin1.apk");
+
+        //activity的插件化方案
         XMActivityHook.hookInstrumentation(this);
         XMActivityHook.hookActivityInstrumentation(this);
 
+        //service的插件化方案
+        HookServiceManager.init();
+
+        // 静态广播的插件化方案
         // 将插件中静态广播都扫描出来
         File testPlugin = getFileStreamPath("plugin1.apk");
         ReceiverHelper.preLoadReceiver(this, testPlugin);

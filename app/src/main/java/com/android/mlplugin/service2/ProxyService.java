@@ -1,4 +1,4 @@
-package com.android.mlplugin;
+package com.android.mlplugin.service2;
 
 import android.app.Application;
 import android.app.Service;
@@ -10,8 +10,7 @@ import android.util.Log;
 
 import com.android.mlplugin.BuildConfig;
 import com.android.mlplugin.plugin.PluginApp;
-import com.android.mlplugin.plugin.XMPlugin;
-import com.android.mlplugin.service2.FieldUtils;
+import com.android.mlplugin.plugin.PluginManger;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -73,7 +72,7 @@ public class ProxyService extends Service {
             Object iActivityManager = mInstanceField.get(defaultSingleton);//3
             //Class<?> iActivityManagerClazz = Class.forName("android.app.IActivityManager");
 
-            PluginApp pluginApp = XMPlugin.getLoadedPluginApk();
+            PluginApp pluginApp = PluginManger.getLoadedPluginApk();
             targetService = (Service) pluginApp.mClassLoader.loadClass(serviceName).newInstance();
 
 //            targetService = (Service) Class.forName(serviceName).newInstance();

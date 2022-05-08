@@ -15,10 +15,11 @@ import java.lang.reflect.Method;
 
 import dalvik.system.DexClassLoader;
 
-public class XMPlugin {
+public class PluginManger {
 
     // 一个插件
-    private static PluginApp mPluginApp;
+    public static PluginApp mPluginApp;
+    private static String apkPath;
 
     /**
      * 加载完一个插件后，会把该apk的资源和类加载器保存到PluginApp中
@@ -26,7 +27,7 @@ public class XMPlugin {
     public static boolean loadPluginApk(Activity context, String apkName) {
 
         //  /data/user/0/com.example.xmplugin2/files/... 目录
-        String apkPath = context.getFileStreamPath(apkName).getPath();
+        apkPath = context.getFileStreamPath(apkName).getPath();
         // 第一步：将assets里的apk保存到私有目录下 /data/user/0/包名/files/
         moveAssetsToSD(context, apkName);
         // 第二步： 加载插件资源
@@ -35,6 +36,10 @@ public class XMPlugin {
         DexClassLoader pluginClassLoader = createDexClassLoader(context, apkPath);
         mPluginApp = new PluginApp(pluginRes, pluginClassLoader);
         return mPluginApp != null;
+    }
+
+    public static String getApkPath() {
+        return apkPath;
     }
 
 

@@ -1,11 +1,11 @@
-package com.android.mlplugin;
+package com.android.mlplugin.broad;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-public class RefInvoke {
+public class RefInvoke2 {
     //无参
     public static Object createObject(String className) {
         Class[] pareTyples = new Class[]{};
@@ -172,8 +172,6 @@ public class RefInvoke {
 
         return null;
     }
-
-
 
     //简写版本
     public static Object getFieldObject(Object obj, String filedName) {

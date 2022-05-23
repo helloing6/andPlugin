@@ -25,6 +25,11 @@
 
         <service android:name=".service2.ProxyService"/>
 
+        <provider
+            android:name=".provider.StubContentProvider"
+            android:authorities="malei"
+            android:exported="true" />
+
     </application>
 
 </manifest>

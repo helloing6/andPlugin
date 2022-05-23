@@ -4,9 +4,15 @@ package com.android.mlplugin;
 import android.Manifest;
 import android.app.Activity;
 import android.content.ComponentName;
+import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.android.mlplugin.broad.ReceiverHelper;
 import com.android.mlplugin.plugin.PluginManger;
@@ -18,6 +24,7 @@ import java.io.File;
 public class MainActivity extends Activity {
 
     private Intent intent;
+    Uri URI = Uri.parse("content://jianqiang/moveis/2");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +83,15 @@ public class MainActivity extends Activity {
         });
 
 
+        this.findViewById(R.id.btn4).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ContentValues values = new ContentValues();
+                values.put("name", "jianqiang");
+                Uri newUri = getContentResolver().insert(Uri.parse("content://maleitest/"), values);
+
+            }
+        });
     }
 
     //读写权限

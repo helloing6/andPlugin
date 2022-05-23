@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 
 import com.android.mlplugin.broad.ReceiverHelper;
+import com.android.mlplugin.provider.ProviderHelper;
 import com.android.mlplugin.service2.HookHelper;
 
 import java.io.File;
@@ -27,7 +28,11 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
 
-
+        try {
+            ProviderHelper.installProviders(this, getFileStreamPath("plugin1.apk"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 //        HookHelper.HookAMS();
 

@@ -32,6 +32,15 @@
             </intent-filter>
         </receiver>
 
+        <provider android:name=".provider.MyContentProvider"
+            android:authorities="com.ml.plugin1" />
+
+        <provider
+            android:name=".provider.TestContentProvider"
+            android:authorities="maleitest"
+            android:enabled="true"
+            android:exported="true"></provider>
+
     </application>
 
 </manifest>
